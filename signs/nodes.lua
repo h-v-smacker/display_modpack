@@ -26,17 +26,27 @@ local function display_poster(pos, node, player)
 	local formspec
 	local meta = minetest.get_meta(pos)
 	local def = minetest.registered_nodes[node.name].display_entities["signs:display_text"]
-
+	
+	local p_text = meta:get_string("text")
+	local d_text = meta:get_string("display_text")
+	-- If orwell96's modified signs_lib version is available and sign macros are active,
+	-- replace them in display_lib's text too.
+	if signs_lib and signs_lib.replace_macros then
+		p_text = signs_lib.replace_macros(p_text)
+		d_text = signs_lib.replace_macros(d_text)
+	end
+	
 	-- Title texture
 	local titletexture = font_lib.make_multiline_texture(
-	  def.font_name, meta:get_string("display_text"),
+	  def.font_name, d_text,
 	  116, 12, def.maxlines, def.valign, def.color)
+	  
 
 	formspec =
 		"size[7,9]"..
 		"background[0,0;7,9;signs_poster_formspec.png]"..
 		"image[0,0;8.4,1.5;"..titletexture.."]"..
-		"textarea[0.3,1.5;7,8;;"..minetest.colorize("#111", minetest.formspec_escape(meta:get_string("text")))..";]"..
+		"textarea[0.3,1.5;7,8;;"..minetest.colorize("#111", minetest.formspec_escape(p_text))..";]"..
 		"bgcolor[#0000]"
 
 	if minetest.is_protected(pos, player:get_player_name()) then

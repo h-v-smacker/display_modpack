@@ -259,7 +259,13 @@ function font_lib.on_display_update(pos, objref)
 	local text = meta:get_string("display_text")
 	local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
 	local entity = objref:get_luaentity()
-
+	
+	-- If orwell96's modified signs_lib version is available and sign macros are active,
+	-- replace them in display_lib's text too.
+	if signs_lib and signs_lib.replace_macros then
+		text = signs_lib.replace_macros(text)
+	end
+	
 	if entity and ndef.display_entities[entity.name] then
 		local def = ndef.display_entities[entity.name]
 
