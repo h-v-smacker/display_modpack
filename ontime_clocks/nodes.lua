@@ -35,7 +35,7 @@ minetest.register_node("ontime_clocks:green_digital", {
 		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
 	},
 	tiles = {"ontime_clocks_digital.png"},
-	groups = {oddly_breakable_by_hand=1,not_blocking_trains=1},
+	groups = {oddly_breakable_by_hand = 1, not_blocking_trains = 1},
 	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 13/32 - 0.01,
@@ -46,17 +46,19 @@ minetest.register_node("ontime_clocks:green_digital", {
 			end },
 	},
 	on_place = display_lib.on_place,
-	on_construct = display_lib.on_construct,
 	on_destruct = display_lib.on_destruct,
 	on_rotate = display_lib.on_rotate,
+	on_construct = function(pos)
+		display_lib.on_construct(pos)
+		local timer = minetest.get_node_timer(pos)
+		timer:start(5)
+	end,
+	on_timer = function(pos)
+		display_lib.update_entities(pos)
+		return true
+	end,
 })
 
-minetest.register_abm({
-	nodenames = {"ontime_clocks:green_digital"},
-	interval = 5,
-	chance = 1,
-	action = display_lib.update_entities,
-})
 
 -- Red digital clock
 minetest.register_node("ontime_clocks:red_digital", {
@@ -73,7 +75,7 @@ minetest.register_node("ontime_clocks:red_digital", {
 		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
 	},
 	tiles = {"ontime_clocks_digital.png"},
-	groups = {oddly_breakable_by_hand=1,not_blocking_trains=1},
+	groups = {oddly_breakable_by_hand = 1, not_blocking_trains = 1},
 	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 13/32 - 0.01,
@@ -84,16 +86,17 @@ minetest.register_node("ontime_clocks:red_digital", {
 			end },
 	},
 	on_place = display_lib.on_place,
-	on_construct = display_lib.on_construct,
 	on_destruct = display_lib.on_destruct,
 	on_rotate = display_lib.on_rotate,
-})
-
-minetest.register_abm({
-	nodenames = {"ontime_clocks:red_digital"},
-	interval = 5,
-	chance = 1,
-	action = display_lib.update_entities,
+	on_construct = function(pos)
+		display_lib.on_construct(pos)
+		local timer = minetest.get_node_timer(pos)
+		timer:start(5)
+	end,
+	on_timer = function(pos)
+		display_lib.update_entities(pos)
+		return true
+	end,
 })
 
 
@@ -111,7 +114,7 @@ minetest.register_node("ontime_clocks:white", {
 		wall_top = { -7/16, 0.5, -7/16, 7/16, 7/16, 7/16},    
 	},
 	tiles = {"ontime_clocks_white.png"},
-	groups = {choppy=1,oddly_breakable_by_hand=1,not_blocking_trains=1},
+	groups = {choppy = 1, oddly_breakable_by_hand = 1, not_blocking_trains = 1},
 	display_entities = { 
 		["ontime_clocks:display"] = {
 			depth = 6/16 - 0.01,
@@ -122,16 +125,17 @@ minetest.register_node("ontime_clocks:white", {
 			end },
 	},
 	on_place = display_lib.on_place,
-	on_construct = display_lib.on_construct,
 	on_destruct = display_lib.on_destruct,
 	on_rotate = display_lib.on_rotate,
-})
-
-minetest.register_abm({
-	nodenames = {"ontime_clocks:white"},
-	interval = 5,
-	chance = 1,
-	action = display_lib.update_entities,
+	on_construct = function(pos)
+		display_lib.on_construct(pos)
+		local timer = minetest.get_node_timer(pos)
+		timer:start(5)
+	end,
+	on_timer = function(pos)
+		display_lib.update_entities(pos)
+		return true
+	end,
 })
 
 minetest.register_node("ontime_clocks:frameless_black", {
@@ -148,7 +152,7 @@ minetest.register_node("ontime_clocks:frameless_black", {
 		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
 	},
 	tiles = {"ontime_clocks_frameless.png"},
-	groups = {choppy=1,oddly_breakable_by_hand=1,not_blocking_trains=1},
+	groups = {choppy = 1, oddly_breakable_by_hand = 1, not_blocking_trains = 1},
 	display_entities = { 
 		["ontime_clocks:display"] = {
 			depth = 7/16,
@@ -159,16 +163,17 @@ minetest.register_node("ontime_clocks:frameless_black", {
 			end },
 	},
 	on_place = display_lib.on_place,
-	on_construct = display_lib.on_construct,
 	on_destruct = display_lib.on_destruct,
 	on_rotate = display_lib.on_rotate,
-})
-
-minetest.register_abm({
-	nodenames = {"ontime_clocks:frameless_black"},
-	interval = 5,
-	chance = 1,
-	action = display_lib.update_entities,
+	on_construct = function(pos)
+		display_lib.on_construct(pos)
+		local timer = minetest.get_node_timer(pos)
+		timer:start(5)
+	end,
+	on_timer = function(pos)
+		display_lib.update_entities(pos)
+		return true
+	end,
 })
 
 minetest.register_node("ontime_clocks:frameless_gold", {
@@ -185,7 +190,7 @@ minetest.register_node("ontime_clocks:frameless_gold", {
 		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
 	},
 	tiles = {"ontime_clocks_frameless.png^[colorize:#FF0"},
-	groups = {choppy=1,oddly_breakable_by_hand=1,not_blocking_trains=1},
+	groups = {choppy = 1, oddly_breakable_by_hand = 1, not_blocking_trains = 1},
 	display_entities = { 
 		["ontime_clocks:display"] = {
 			depth = 7/16,
@@ -196,17 +201,19 @@ minetest.register_node("ontime_clocks:frameless_gold", {
 			end },
 	},
 	on_place = display_lib.on_place,
-	on_construct = display_lib.on_construct,
 	on_destruct = display_lib.on_destruct,
 	on_rotate = display_lib.on_rotate,
+	on_construct = function(pos)
+		display_lib.on_construct(pos)
+		local timer = minetest.get_node_timer(pos)
+		timer:start(5)
+	end,
+	on_timer = function(pos)
+		display_lib.update_entities(pos)
+		return true
+	end,
 })
 
-minetest.register_abm({
-	nodenames = {"ontime_clocks:frameless_gold"},
-	interval = 5,
-	chance = 1,
-	action = display_lib.update_entities,
-})
 
 minetest.register_node("ontime_clocks:frameless_white", {
 	description = S("Frameless white clock"),
@@ -222,7 +229,7 @@ minetest.register_node("ontime_clocks:frameless_white", {
 		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
 	},
 	tiles = {"ontime_clocks_frameless.png^[colorize:#FFF"},
-	groups = {choppy=1,oddly_breakable_by_hand=1,not_blocking_trains=1},
+	groups = {choppy = 1, oddly_breakable_by_hand = 1, not_blocking_trains = 1},
 	display_entities = { 
 		["ontime_clocks:display"] = {
 			depth = 7/16,
@@ -233,14 +240,32 @@ minetest.register_node("ontime_clocks:frameless_white", {
 			end },
 	},
 	on_place = display_lib.on_place,
-	on_construct = display_lib.on_construct,
 	on_destruct = display_lib.on_destruct,
 	on_rotate = display_lib.on_rotate,
+	on_construct = function(pos)
+		display_lib.on_construct(pos)
+		local timer = minetest.get_node_timer(pos)
+		timer:start(5)
+	end,
+	on_timer = function(pos)
+		display_lib.update_entities(pos)
+		return true
+	end,
 })
 
-minetest.register_abm({
-	nodenames = {"ontime_clocks:frameless_white"},
-	interval = 5,
-	chance = 1,
-	action = display_lib.update_entities,
+                                            
+-- LBM to start timers on existing, ABM-driven nodes
+minetest.register_lbm({
+	name = "ontime_clocks:timer_init",
+	nodenames = {"ontime_clocks:green_digital",
+			"ontime_clocks:red_digital",
+			"ontime_clocks:white",
+			"ontime_clocks:frameless_black",
+			"ontime_clocks:frameless_gold",
+			"ontime_clocks:frameless_white"},
+	run_at_every_load = false,
+	action = function(pos)
+		local timer = minetest.get_node_timer(pos)
+		timer:start(5)
+	end,
 })
